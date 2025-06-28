@@ -1,17 +1,22 @@
 import subprocess
 import os
-from templates import utils_code, main_code  # 👈 import from separated module
+from templates import utils_code, main_code  # Add more like config_code, helper_code...
 
 # --- Directory Setup ---
 src_dir = "src"
 os.makedirs(src_dir, exist_ok=True)
 
-# --- Write Source Files ---
-with open(os.path.join(src_dir, "utils.py"), "w") as f:
-    f.write(utils_code)
+# --- Source Code Map ---
+source_files = {
+    "utils.py": utils_code,
+    "main.py": main_code,
+    # Add more like "config.py": config_code
+}
 
-with open(os.path.join(src_dir, "main.py"), "w") as f:
-    f.write(main_code)
+# --- Write Source Files ---
+for filename, code in source_files.items():
+    with open(os.path.join(src_dir, filename), "w") as f:
+        f.write(code)
 
 # --- PyInstaller Build ---
 print("Compiling with PyInstaller...")
